@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Exposure Survey (Bangladesh)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+   <style>
+/* ======== GLASS MORPHISM THEME ======== */
+body {
+  background: #10161F;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 12px;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #e7edf5;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* form container responsive */
+.form-container {
+  background-color: rgba(25, 35, 50, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .form-container {
+    padding: 1rem !important;
+    border-radius: 10px;
+  }
+  h1 {
+    font-size: 1.4rem !important;
+    line-height: 1.6rem !important;
+  }
+  h2.text-xl {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Gradient Glow Background */
+.form-container::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle at 30% 70%, rgba(52, 152, 219, 0.75) 0%, rgba(41, 128, 185, 0.35) 50%, transparent 85%);
+  border-radius: 50%;
+  bottom: -40px;
+  left: -60px;
+  filter: blur(70px);
+  z-index: -1;
+  animation: moveBall 20s infinite alternate ease-in-out;
+  mix-blend-mode: screen;
+}
+.form-container::after {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle at 30% 70%, rgba(52, 152, 219, 0.75) 0%, rgba(41, 128, 185, 0.35) 50%, transparent 85%);
+  border-radius: 50%;
+  top: -60px;
+  right: -60px;
+  filter: blur(60px);
+  z-index: -1;
+  animation: moveBall2 18s infinite alternate-reverse ease-in-out;
+  mix-blend-mode: screen;
+}
+@keyframes moveBall {
+  0% {transform: translate(0, 0);}
+  50% {transform: translate(50px, -30px);}
+  100% {transform: translate(0, 40px);}
+}
+@keyframes moveBall2 {
+  0% {transform: translate(0, 0);}
+  50% {transform: translate(-40px, 40px);}
+  100% {transform: translate(30px, -30px);}
+}
+
+/* Dropdown (Glass Morphism) */
+select {
+  display: block;
+  width: 100%;
+  height: 46px;
+  padding: 0.75rem 0.9rem;
+  line-height: 1.45;
+  font-size: 1rem;
+  color: #f2f7ff;
+  background: rgba(25, 35, 50, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.28s ease;
+  appearance: none;
+  box-sizing: border-box;
+  color-scheme: dark;
+  background-image: linear-gradient(45deg, transparent 50%, #bfe0ff 50%), linear-gradient(135deg, #bfe0ff 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2rem;
+}
+select option {
+  color: rgba(231, 237, 245, 0.9);
+  background-color: rgba(20, 30, 45, 0.95);
+}
+select:focus {
+  outline: none;
+  background: rgba(40, 60, 80, 0.35);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.55);
+  border-color: rgba(52, 152, 219, 0.55);
+}
+select:hover {
+  background: rgba(45, 60, 80, 0.35);
+  border-color: rgba(120, 180, 255, 0.4);
+}
+
+/* Input & Textarea */
+.input-field,
+textarea,
+.select-like {
+  display: block;
+  width: 100%;
+  height: 46px;
+  padding: 0.75rem 0.9rem;
+  line-height: 1.45;
+  font-size: 1rem;
+  background-color: rgba(30, 40, 55, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #eaf4ff;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: all 0.28s ease;
+  box-sizing: border-box;
+}
+.input-field::placeholder {
+  color: rgba(231, 237, 245, 0.55);
+}
+.input-field:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.55);
+  background-color: rgba(52, 73, 94, 0.36);
+}
+
+/* Utility classes */
+.section-title {color: #bfe0ff;text-shadow: 0 0 12px rgba(52, 152, 219, 0.35);}
+.muted {color: #b9c8d8;}
+.hint {font-size: 12px;color: #a6b6c7;}
+.label {color: #dbe8f6;font-weight: 500;}
+.opt-label {color: #eaf4ff;}
+.card {background: rgba(25, 35, 50, 0.22);border: 1px solid rgba(255, 255, 255, 0.10);border-radius: 12px;padding: 14px;}
+.chip {display: inline-block;background: rgba(33, 150, 243, 0.14);color: #eaf4ff;border: 1px solid rgba(255, 255, 255, 0.12);padding: 2px 8px;border-radius: 999px;font-size: 12px;}
+.consent-box {background: rgba(255, 193, 7, 0.08);border: 1px solid rgba(255, 193, 7, 0.25);color: #ffeab3;border-radius: 8px;padding: 10px 12px;font-size: 0.92rem;}
+.submit-btn {background: #8bd2ff;color: #000;font-weight: 700;padding: 10px 28px;border-radius: 8px;transition: all 0.25s ease;min-width: 220px;display: inline-flex;align-items: center;justify-content: center;gap: 10px;border: 1px solid rgba(255, 255, 255, 0.12);}
+.submit-btn:hover {background-color: #52809d;transform: translateY(-1px);}
+.heading-hero {color: #9ed1ff;text-shadow: 0 0 10px rgba(62, 153, 255, 0.35);}
+.linkish {color: #8bd2ff;}
+.linkish:hover {text-decoration: underline;}
+.text-xl.font-semibold {color: #8BD2FF !important;}
+.age-select {height: 54px !important;padding-top: 0.9rem !important;padding-bottom: 0.9rem !important;font-size: 1.05rem;}
+</style>
+</head>
+
+<body>
+    <div class="form-container w-full p-6 sm:p-9">
+        <!-- Top Bar -->
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+                <img src="assets/logo.png" alt="Logo" class="h-8 w-8">
+                <div class="text-lg font-semibold text-[#8ad3ff] drop-shadow">Team25</div>
+                <span class="chip">Survey</span>
+            </div>
+            <a href="#" class="linkish text-sm">About</a>
+        </div>
+
+        <!-- Header -->
+        <h1 class="text-[62px] font-bold mb-6 text-center text-white leading-tight">
+            Digital Exposure and Its Effects on Adolescent’s Mental and Physical Well-Being in Bangladesh
+        </h1>
+
+        <p class="text-justify text-gray-200 mb-8 text-lg leading-relaxed max-w-5xl mx-auto">
+            This research aims to explore how increasing digital exposure affects the mental and physical well-being of
+            adolescents in Bangladesh. It focuses on understanding patterns of screen use, sleep quality, learning
+            behavior, and emotional stability among young individuals. The study seeks to identify both the positive and
+            negative outcomes of technology use in daily life and how parental involvement influences these effects. The
+            findings will help raise awareness and promote healthier digital habits among adolescents.
+            <br /><br />
+            <span class="block mt-2 text-[17px] text-justify text-gray-300">
+                ( এই গবেষণার লক্ষ্য হলো বাংলাদেশের কিশোর-কিশোরীদের মানসিক ও শারীরিক সুস্থতার উপর ডিজিটাল ব্যবহারের
+                প্রভাব বিশ্লেষণ করা। এতে স্ক্রিন ব্যবহারের ধরন, ঘুমের মান, শেখার আগ্রহ এবং মানসিক স্থিতিশীলতার মতো
+                বিষয়গুলো পর্যালোচনা করা হয়েছে। গবেষণাটি প্রযুক্তি ব্যবহারের ইতিবাচক ও নেতিবাচক প্রভাব এবং অভিভাবকের
+                ভূমিকা কীভাবে এ প্রভাবগুলোকে নিয়ন্ত্রণ করে তা নির্ণয় করতে চায়। এর ফলাফল কিশোরদের মধ্যে স্বাস্থ্যকর
+                ডিজিটাল অভ্যাস গড়ে তুলতে সহায়ক হবে। )
+            </span>
+        </p>
+
+
+        <!-- Consent Note -->
+        <div class="consent-box mb-6 text-center max-w-3xl mx-auto leading-relaxed">
+            By submitting, you agree that your responses may be analyzed in aggregate for academic purposes. <br />
+            জমা দেওয়ার মাধ্যমে আপনি সম্মতি দিচ্ছেন যে আপনার উত্তরগুলো একাডেমিক কাজে সামগ্রিকভাবে বিশ্লেষণ করা হতে পারে।
+        </div>
+
+        <!-- FORM -->
+        <form id="digitalSurveyForm" class="space-y-7">
+
+            <!-- A. Demographic Information -->
+            <h2 class="text-xl font-semibold" style="color:#8BD2FF;">A. Demographic Information (ক. সাধারণ তথ্য)</h2>
+          <div>
+  <label class="block mb-2 label">
+    A1. আপনার বয়স (Your age)
+  </label>
+  <select name="A1_age_years" class="input-field age-select" required>
+    <option value="" disabled selected>-- Select Age --</option>
+    <option value="10">10 বছর (10 years)</option>
+    <option value="11">11 বছর (11 years)</option>
+    <option value="12">12 বছর (12 years)</option>
+    <option value="13">13 বছর (13 years)</option>
+    <option value="14">14 বছর (14 years)</option>
+    <option value="15">15 বছর (15 years)</option>
+    <option value="16">16 বছর (16 years)</option>
+    <option value="17">17 বছর (17 years)</option>
+    <option value="18">18 বছর (18 years)</option>
+    <option value="19">19 বছর (19 years)</option>
+  </select>
+</div>
+
+            <div>
+                <span class="block mb-2 label">A2. আপনি (You are)</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 card">
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A2_gender" value="Male"
+                            required> ছেলে (Male)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A2_gender"
+                            value="Female"> মেয়ে (Female)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A2_gender"
+                            value="Others"> অন্যান্য (Others)</label>
+                </div>
+            </div>
+
+            <div>
+                <span class="block mb-2 label">A3. আপনার ধর্ম (Your religion)</span>
+                <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 card">
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A3_religion"
+                            value="Islam" required> ইসলাম (Islam)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A3_religion"
+                            value="Hindu"> হিন্দু (Hindu)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A3_religion"
+                            value="Christian"> খ্রিস্টান (Christian)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A3_religion"
+                            value="Buddhist"> বৌদ্ধ (Buddhist)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A3_religion"
+                            value="Others"> অন্যান্য (Others)</label>
+                </div>
+            </div>
+
+            <div>
+                <span class="block mb-2 label">A4. আপনার বৈবাহিক অবস্থা (Your marital status)</span>
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 card">
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A4_marital"
+                            value="Married" required> বিবাহিত (Married)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A4_marital"
+                            value="Unmarried"> অবিবাহিত (Unmarried)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A4_marital"
+                            value="Divorced"> তালাকপ্রাপ্ত (Divorced)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="A4_marital"
+                            value="Widowed"> বিধবা/বিপত্নীক (Widowed)</label>
+                </div>
+            </div>
+
+
+            <!-- B. Family Related Information -->
+            <h2 class="text-xl font-semibold" style="color:#8BD2FF;">B. Family Related Information (খ. পারিবারিক তথ্য)
+            </h2>
+
+            <div>
+                <span class="block mb-2 label">B1. আপনি কোথায় বসবাস করেন? (Where do you live?)</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 card">
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="B1_residence"
+                            value="Rural" required> গ্রামীণ এলাকা (Rural area)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="B1_residence"
+                            value="Urban"> শহুরে এলাকা (Urban area)</label>
+                </div>
+            </div>
+
+            <div>
+                <span class="block mb-2 label">B2. আপনি কি কর্মজীবী? (Are you employed?)</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 card">
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="B2_employed" value="Yes"
+                            required> হ্যাঁ (Yes)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="B2_employed" value="No">
+                        না (No)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="B2_employed"
+                            value="On job search"> খোঁজে আছি (On job search)</label>
+                </div>
+            </div>
+
+            <div>
+                <label class="block mb-2 label">B3. আপনার পরিবারের বার্ষিক আয় (Your family’s yearly income)</label>
+                <input name="B3_income_tk" type="number" placeholder="উদাহরণ: ২০০০০০ টাকা (Example: 200000 TK)"
+                    class="input-field" required />
+            </div>
+
+            <div>
+                <span class="block mb-2 label">B4. আপনি কি ধরণের পরিবারে বসবাস করেন? (What is your family type?)</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 card">
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="B4_family_type"
+                            value="Joint family" required> যৌথ পরিবার (Joint family)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="B4_family_type"
+                            value="Nuclear family"> একক পরিবার (Nuclear family)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="B4_family_type"
+                            value="Extended joint family"> বর্ধিত যৌথ পরিবার (Extended joint family)</label>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block mb-2 label">B5. আপনি প্রতিদিন সাধারণত কত সময় আপনার পিতা-মাতার সাথে কাটান? (How
+                        much time do you usually spend with your parents each day?)</label>
+                    <input name="B5_time_with_parents_hours" type="number" step="0.1"
+                        placeholder="__________ ঘন্টা (hours)" class="input-field" required />
+                </div>
+                <div>
+                    <span class="block mb-2 label">B6. আপনার পিতা-মাতার সাথে আপনার সম্পর্ক কেমন? (How would you express
+                        the nature of your relationship with your parents?)</span>
+                    <select name="B6_relationship" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>খুবই ভালো (Very good)</option>
+                        <option>ভালো (Good)</option>
+                        <option>মাঝারি (Moderate)</option>
+                        <option>খারাপ (Bad)</option>
+                        <option>খুবই খারাপ (Very bad)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- C. Child Physical Information -->
+            <h2 class="text-xl font-semibold" style="color:#8BD2FF;">C. Child Physical Information</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <label class="block mb-2 label">C1. আপনার উচ্চতা কত? (What is your height?)</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input name="C1_height_feet" type="number" placeholder="______ফিট (Feet)" class="input-field"
+                            required />
+                        <input name="C1_height_inches" type="number" placeholder="_____ইঞ্চি (Inch)" class="input-field"
+                            required />
+                    </div>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="block mb-2 label">C2. আপনার ওজন কত? (What is your weight?)</label>
+                    <input name="C2_weight_kg" type="number" placeholder="_______ কেজি (KG)" class="input-field"
+                        required />
+                </div>
+            </div>
+
+            <div>
+                <label class="block mb-2 label">C3. অতিরিক্ত স্ক্রিন ব্যবহারের ফলে আপনি কি কোনো শারীরিক সমস্যা অনুভব
+                    করেন? (Do you experience any physical problems due to excessive screen use?)</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 card">
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="C3_physical[]"
+                            value="Eye irritation"> চোখে জ্বালা বা ব্যথা (Eye irritation)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="C3_physical[]"
+                            value="Headache"> মাথাব্যথা (Headache)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="C3_physical[]"
+                            value="Joint pain / bone pain"> জয়েন্টে বা হাড়ে ব্যথা (Joint pain / bone pain)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="C3_physical[]"
+                            value="Loss of appetite"> খিদে না পাওয়া (Loss of appetite)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="C3_physical[]"
+                            value="Irritable mood"> খিটখিটে মেজাজ (Irritable mood)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="C3_physical[]"
+                            value="Obesity"> মোটা হয়ে যাওয়া (Obesity)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="C3_physical[]"
+                            value="Sleeplessness"> ঘুম না আসা / অনিদ্রা (Sleeplessness)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="C3_physical[]"
+                            value="Others"> অন্যান্য (Others)</label>
+                </div>
+            </div>
+
+            <div>
+                <label class="block mb-2 label">C4. আপনার আচরণ ও বৈশিষ্ট্য অনুযায়ী আপনার ব্যক্তিত্ব কেমন? (Based on
+                    your behavior and traits, how would you describe your personality?)</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 card">
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="C4_personality"
+                            value="Introvert" required> অন্তর্মুখী (Introvert)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="C4_personality"
+                            value="Extrovert"> বহির্মুখী (Extrovert)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="radio" name="C4_personality"
+                            value="Ambivert"> মাঝামাঝি (Ambivert)</label>
+                </div>
+            </div>
+
+            <!-- D. Screen Usage & Digital Activities -->
+            <h2 class="text-xl font-semibold" style="color:#8BD2FF;">D. Screen Usage & Digital Activities</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block mb-2 label">D1. প্রতিদিন আপনি সাধারণত কতক্ষণ স্ক্রিন ব্যবহার করেন? (How many
+                        hours per day do you spend on screens?)</label>
+                    <select name="D1_daily_screen" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>১ ঘণ্টার কম (Less than 1 hour)</option>
+                        <option>১–৩ ঘণ্টা (1–3 hours)</option>
+                        <option>৩–৫ ঘণ্টা (3–5 hours)</option>
+                        <option>৫ ঘণ্টার বেশি (More than 5 hours)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block mb-2 label">D2. আপনি ছুটির দিনে গড়ে কতক্ষণ স্ক্রিন ব্যবহার করেন? (On weekends,
+                        how many hours on average do you use screens?)</label>
+                    <select name="D2_weekend_screen" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>১ ঘণ্টার কম (Less than 1 hour)</option>
+                        <option>১–৩ ঘণ্টা (1–3 hours)</option>
+                        <option>৩–৫ ঘণ্টা (3–5 hours)</option>
+                        <option>৫ ঘণ্টার বেশি (More than 5 hours)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block mb-2 label">D3. আপনার ব্যবহারের জন্য সবচেয়ে প্রিয় বা বেশি ব্যবহৃত ডিভাইস কোনটি?
+                    (Which device is mostly preferred or most frequently used by you?)</label>
+                <select name="D3_device" class="input-field" required>
+                    <option value="" disabled selected>-- Select --</option>
+                    <option>মোবাইল ফোন (Mobile phone)</option>
+                    <option>ট্যাবলেট (Tablet)</option>
+                    <option>ল্যাপটপ (Laptop)</option>
+                    <option>ডেস্কটপ কম্পিউটার (Desktop computer)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block mb-2 label">D4. আপনার স্ক্রিন ব্যবহারের সময় কোন ধরণের কনটেন্টে আগ্রহ বেশি? (Which
+                    types of content do you show the most interest in during screen time?)</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 card">
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="D4_content[]"
+                            value="Games"> গেমস (Games)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="D4_content[]"
+                            value="Video (YouTube, Netflix)"> ভিডিও (YouTube, Netflix)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="D4_content[]"
+                            value="Music"> গান (Music)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="D4_content[]"
+                            value="Social media"> সোশ্যাল মিডিয়া (Facebook, Instagram)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="D4_content[]"
+                            value="Video chatting"> ভিডিও চ্যাটিং (Messenger, WhatsApp)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="D4_content[]"
+                            value="Educational apps/videos"> শিক্ষামূলক অ্যাপ/ভিডিও (Educational apps/videos)</label>
+                    <label class="opt-label flex gap-2 items-center"><input type="checkbox" name="D4_content[]"
+                            value="News"> সংবাদ/খবর (News)</label>
+                </div>
+            </div>
+
+
+            <div class="space-y-6">
+                <!-- D5 -->
+                <div>
+                    <label class="block mb-2 label">
+                        D5. আপনার পিতা/মাতা প্রতিদিন গড়ে কত সময় ডিজিটাল ডিভাইস ব্যবহার করেন?
+                        (How much time, on average, do your parents spend each day using digital devices?)
+                    </label>
+                    <select name="D5_parents_time" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>১ ঘণ্টার কম (Less than 1 hour)</option>
+                        <option>১–৩ ঘণ্টা (1–3 hours)</option>
+                        <option>৩–৫ ঘণ্টা (3–5 hours)</option>
+                        <option>৫ ঘণ্টার বেশি (More than 5 hours)</option>
+                    </select>
+                </div>
+
+                <!-- D6 -->
+                <div>
+                    <label class="block mb-2 label">
+                        D6. আপনার এআই (AI) ব্যবহার সাধারণত কতো ঘন ঘন ঘটে?
+                        (How often do you typically use AI?)
+                    </label>
+                    <select name="D6_ai_frequency" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>প্রতিদিন (Daily)</option>
+                        <option>সপ্তাহে কয়েকবার (A few times a week)</option>
+                        <option>মাঝে মাঝে (Occasionally)</option>
+                        <option>ব্যবহার করে না (Does not use)</option>
+                    </select>
+                </div>
+
+                <!-- D7 -->
+                <div>
+                    <label class="block mb-2 label">
+                        D7. আপনার মতে কৃত্রিম বুদ্ধিমত্তার (AI) উপর অতিরিক্ত নির্ভরতা কি মানুষের জন্য ক্ষতিকর হতে পারে?
+                        (In your opinion, can excessive dependency on AI be harmful to humans?)
+                    </label>
+                    <div class="card flex flex-col gap-2">
+                        <label class="opt-label flex gap-2 items-center">
+                            <input type="radio" name="D7_ai_harmful" value="Yes" required> হ্যাঁ (Yes)
+                        </label>
+                        <label class="opt-label flex gap-2 items-center">
+                            <input type="radio" name="D7_ai_harmful" value="No"> না (No)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- D8 -->
+                <div>
+                    <label class="block mb-2 label">
+                        D8. AI ব্যবহারে কি আপনার সৃজনশীলতা হ্রাস পাচ্ছে?
+                        (Is your creativity declining due to AI use?)
+                    </label>
+                    <div class="card flex flex-col gap-2">
+                        <label class="opt-label flex gap-2 items-center">
+                            <input type="radio" name="D8_creativity_decline" value="Yes" required> হ্যাঁ (Yes)
+                        </label>
+                        <label class="opt-label flex gap-2 items-center">
+                            <input type="radio" name="D8_creativity_decline" value="No"> না (No)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- E. Sleep & Health (Vertical Layout) -->
+            <h2 class="text-xl font-semibold" style="color:#8BD2FF;">E. Sleep & Health</h2>
+
+            <div class="space-y-6">
+                <!-- E1 -->
+                <div>
+                    <label class="block mb-2 label">
+                        E1. প্রতিদিনের রুটিনে আপনার ঘুমের গড় সময় কত?
+                        (In your daily routine, what would you estimate as your average sleep duration?)
+                    </label>
+                    <select name="E1_sleep_duration" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>৬ ঘণ্টার কম (&lt;6 hours)</option>
+                        <option>৬–৮ ঘণ্টা (6–8 hours)</option>
+                        <option>৮ ঘণ্টার বেশি (&gt;8 hours)</option>
+                    </select>
+                </div>
+
+                <!-- E2 -->
+                <div>
+                    <label class="block mb-2 label">
+                        E2. পর্যাপ্ত ঘুমের পরেও আপনি কি মানসিকভাবে হতাশ / শারীরিকভাবে দুর্বল অনুভব করেন?
+                        (Do you feel mentally depressed or physically weak even after getting enough sleep?)
+                    </label>
+                    <select name="E2_after_sleep_feel" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ (Yes)</option>
+                        <option>না (No)</option>
+                    </select>
+                </div>
+
+                <!-- E3 -->
+                <div>
+                    <label class="block mb-2 label">
+                        E3. আপনি কি ঘুমের জন্য কোনো ওষুধ গ্রহণ করেন?
+                        (Do you take any medicine for your sleep?)
+                    </label>
+                    <select name="E3_sleep_medicine" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ (Yes)</option>
+                        <option>না (No)</option>
+                    </select>
+                </div>
+
+                <!-- E4 -->
+                <div>
+                    <label class="block mb-2 label">
+                        E4. আপনি কোন ধরনের নেশাজাতীয় দ্রব্য সেবন করেন?
+                        (Which type of addictive substance do you consume?)
+                    </label>
+                    <select name="E4_addictive" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ (Yes)</option>
+                        <option>না (No)</option>
+                    </select>
+                </div>
+
+                <!-- E5 -->
+                <div>
+                    <label class="block mb-2 label">
+                        E5. রাতে আপনি সাধারণত কতটায় ঘুমাতে যান?
+                        (At what time do you usually go to sleep at night?)
+                    </label>
+                    <input name="E5_bedtime" type="text"
+                        placeholder="_______________________ (যেমন: রাত ১০:৩০ / 10:30 PM)" class="input-field"
+                        required />
+                    <p class="hint mt-1">Format example: 10:30 PM</p>
+                </div>
+
+                <!-- E6 -->
+                <div>
+                    <label class="block mb-2 label">
+                        E6. সকালে আপনি সাধারণত কতটায় ঘুম থেকে জাগেন?
+                        (At what time do you usually wake up in the morning?)
+                    </label>
+                    <input name="E6_wake_time" type="text"
+                        placeholder="_______________________ (যেমন: সকাল ৬:৩০ / 6:30 AM)" class="input-field"
+                        required />
+                    <p class="hint mt-1">Format example: 6:30 AM</p>
+                </div>
+            </div>
+
+
+            <!-- F. Academic & Learning Activities -->
+            <h2 class="text-xl font-semibold" style="color:#8BD2FF;">F. Academic & Learning Activities</h2>
+
+            <div class="space-y-6">
+                <!-- F1 -->
+                <div>
+                    <label class="block mb-2 label">
+                        F1. আপনার পড়াশোনার ফলাফল নিয়ে আপনি কতটা সন্তুষ্ট?
+                        (How satisfied are you with your academic performance?)
+                    </label>
+                    <select name="F1_academic_satisfaction" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>অত্যন্ত সন্তুষ্ট (Highly satisfactory)</option>
+                        <option>সন্তুষ্ট (Satisfactory)</option>
+                        <option>মোটামুটি সন্তুষ্ট (Moderately satisfactory)</option>
+                        <option>কিছুটা অসন্তুষ্ট (Unsatisfactory)</option>
+                        <option>একেবারেই অসন্তুষ্ট (Highly unsatisfactory)</option>
+                    </select>
+                </div>
+
+                <!-- F2 -->
+                <div>
+                    <label class="block mb-2 label">
+                        F2. অতিরিক্ত স্ক্রিন ব্যবহারের ফলে আপনার একাডেমিক ফলাফলে কি প্রভাব পড়ছে?
+                        (Is excessive screen use having a negative impact on your academic performance?)
+                    </label>
+                    <select name="F2_screen_impact" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ (Yes)</option>
+                        <option>না (No)</option>
+                        <option>মাঝামাঝি (Sometimes)</option>
+                    </select>
+                </div>
+
+                <!-- F3 -->
+                <div>
+                    <label class="block mb-2 label">
+                        F3. নতুন জ্ঞান বা দক্ষতা অর্জনে আপনার আগ্রহ কেমন?
+                        (How is your interest in acquiring new knowledge or skills?)
+                    </label>
+                    <select name="F3_learning_interest" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>খুব আগ্রহী (Very interested)</option>
+                        <option>আগ্রহী (Interested)</option>
+                        <option>মাঝারি (Moderate)</option>
+                        <option>কম আগ্রহ (Less interested)</option>
+                        <option>আগ্রহ নেই (Not interested)</option>
+                    </select>
+                </div>
+
+                <!-- F4 -->
+                <div>
+                    <label class="block mb-2 label">
+                        F4. স্ক্রিন ব্যবহারের কারণে কি আপনার শেখার আগ্রহ কমেছে?
+                        (Has your interest in learning decreased due to screen use?)
+                    </label>
+                    <select name="F4_interest_reduced" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ (Yes)</option>
+                        <option>না (No)</option>
+                        <option>কিছুটা (Somewhat)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- G. Mental & Behavioral Activities -->
+            <h2 class="text-xl font-semibold" style="color:#8BD2FF;">G. Mental & Behavioral Activities</h2>
+
+            <div class="space-y-6">
+                <!-- G1 -->
+                <div>
+                    <label class="block mb-2 label">
+                        G1. আপনি কি কোনো কারণে মেজাজের পরিবর্তন (Mood Swings) অনুভব করেন, যেমন হঠাৎ রাগ, দুঃখ, উত্তেজনা
+                        বা মন খারাপের অনুভূতি?
+                        (Do you experience mood swings for any reason, such as sudden feelings of anger, sadness,
+                        excitement, or emotional distress?)
+                    </label>
+                    <select name="G1_mood_swings" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>কখনও না (Never)</option>
+                        <option>মাঝে মাঝে (Sometimes)</option>
+                        <option>প্রায়ই (Often)</option>
+                        <option>সবসময় (Always)</option>
+                    </select>
+                </div>
+
+                <!-- G2 -->
+                <div>
+                    <label class="block mb-2 label">
+                        G2. আপনি কি স্ক্রিন না পেলে সহজেই উদ্বিগ্ন হয়ে পড়েন?
+                        (Do you get easily anxious if you don’t have access to a screen?)
+                    </label>
+                    <select name="G2_anxious_without_screen" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>না (No)</option>
+                        <option>মাঝে মাঝে (Sometimes)</option>
+                        <option>প্রায়ই (Often)</option>
+                        <option>সবসময় (Always)</option>
+                    </select>
+                </div>
+
+                <!-- G3 -->
+                <div>
+                    <label class="block mb-2 label">
+                        G3. মানুষের সঙ্গে কথা বলা বা যোগাযোগের ক্ষেত্রে আপনার যোগাযোগ দক্ষতা (communication skill) কেমন?
+                        (How are your communication skills when interacting with others?)
+                    </label>
+                    <select name="G3_communication" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>খুবই ভালো (Very good)</option>
+                        <option>ভালো (Good)</option>
+                        <option>মাঝারি (Moderate)</option>
+                        <option>খারাপ (Bad)</option>
+                        <option>খুবই খারাপ (Very bad)</option>
+                    </select>
+                </div>
+
+                <!-- G4 -->
+                <div>
+                    <label class="block mb-2 label">
+                        G4. অতিরিক্ত ডিভাইস এবং প্রযুক্তি ব্যবহারের কারণে আপনি কি নিজেকে পরিবার বা বন্ধুদের থেকে আলাদা
+                        করে ফেলেছেন?
+                        (Due to excessive use of devices and technology, do you isolate yourself from your family or
+                        friends?)
+                    </label>
+                    <select name="G4_isolation" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ (Yes)</option>
+                        <option>না (No)</option>
+                        <option>মাঝে মাঝে (Sometimes)</option>
+                    </select>
+                </div>
+
+                <!-- G5 -->
+                <div>
+                    <label class="block mb-2 label">
+                        G5. আপনি কি মনে করেন সোশ্যাল মিডিয়া বা ভিডিও চ্যাট মানসিক স্বাস্থ্যের উপর নেতিবাচক প্রভাব
+                        ফেলেছে?
+                        (Do you think social media or video chatting has negatively affected mental health?)
+                    </label>
+                    <select name="G5_negative_mental" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ (Yes)</option>
+                        <option>না (No)</option>
+                        <option>নিশ্চিত নই (Not sure)</option>
+                    </select>
+                </div>
+
+                <!-- G6 -->
+                <div>
+                    <label class="block mb-2 label">
+                        G6. আপনি কি মনে করেন যে আপনার মানসিক সমস্যার কারণে আপনি বেশি স্ক্রিন ব্যবহার করেন?
+                        (Do you think you use screens more because of your mental health issues?)
+                    </label>
+                    <select name="G6_more_screen_due_to_mental" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ (Yes)</option>
+                        <option>না (No)</option>
+                        <option>মাঝে মাঝে (Sometimes)</option>
+                    </select>
+                </div>
+
+                <!-- G7 -->
+                <div>
+                    <label class="block mb-2 label">
+                        G7. আপনি কি মাঝে মাঝে বা প্রায়ই তীব্র উদ্বেগ বা প্যানিক অ্যাটাক অনুভব করেন?
+                        (Do you sometimes or often experience intense anxiety or panic attacks?)
+                    </label>
+                    <select name="G7_panic_attack" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ, নিয়মিত (Yes, regularly)</option>
+                        <option>মাঝে মাঝে (Sometimes)</option>
+                        <option>খুব কম (Rarely)</option>
+                        <option>কখনও না (Never)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- H. Eating & Health Behavior -->
+            <h2 class="text-xl font-semibold" style="color:#8BD2FF;">H. Eating & Health Behavior</h2>
+
+            <div class="space-y-6">
+                <!-- H1 -->
+                <div>
+                    <label class="block mb-2 label">
+                        H1. আপনি কি খাওয়ার সময় মোবাইল ব্যবহার করেন?
+                        (Do you use a mobile phone while eating?)
+                    </label>
+                    <select name="H1_mobile_while_eating" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>না (No)</option>
+                        <option>মাঝে মাঝে (Sometimes)</option>
+                        <option>প্রায়ই (Often)</option>
+                        <option>সবসময় (Always)</option>
+                    </select>
+                </div>
+
+                <!-- H2 -->
+                <div>
+                    <label class="block mb-2 label">
+                        H2. আপনি কি মনে করেন খাওয়ার সময় মোবাইল ব্যবহার স্বাস্থ্যের উপর প্রভাব ফেলে?
+                        (Do you think using a mobile phone while eating affects your health?)
+                    </label>
+                    <select name="H2_affects_health" class="input-field" required>
+                        <option value="" disabled selected>-- Select --</option>
+                        <option>হ্যাঁ (Yes)</option>
+                        <option>না (No)</option>
+                        <option>নিশ্চিত নই (Not sure)</option>
+                    </select>
+                </div>
+
+                <!-- H3 -->
+                <div>
+                    <label class="block mb-2 label">
+                        H3. আপনি যখন হতাশ বা মন খারাপ অনুভব করেন, তখন নিচের কোনটি আপনার ক্ষেত্রে বেশি ঘটে?
+                        (When you feel frustrated or emotionally low, which of the following tends to occur in your
+                        case?)
+                    </label>
+                    <div class="card space-y-2">
+                        <label class="opt-label flex gap-2 items-center">
+                            <input type="radio" name="H3_appetite_change" value="Loss of appetite" required>
+                            খাদ্য গ্রহণের ইচ্ছা হ্রাস পায় (Loss of appetite)
+                        </label>
+                        <label class="opt-label flex gap-2 items-center">
+                            <input type="radio" name="H3_appetite_change" value="Overeating">
+                            স্বাভাবিকের তুলনায় বেশি খাদ্য গ্রহণ করেন (Overeating)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consent + Submit -->
+            <div class="space-y-3 pt-2">
+                <label class="flex items-center gap-3">
+                    <input type="checkbox" id="consent" class="h-4 w-4">
+                    <span class="label">I confirm my voluntary participation. (আমি স্বেচ্ছায় অংশগ্রহণে সম্মত)</span>
+                </label>
+
+                <div id="submitMsg" class="text-center font-medium pb-1 hidden"></div>
+
+                <div class="text-center pt-2">
+                    <button id="submitBtn" type="submit" class="submit-btn">
+                        <span id="submitBtnText">Submit (জমা দিন)</span>
+                        <span id="progressContainer" class="hidden items-center gap-2">
+                            <svg id="spinner" class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
+                                </path>
+                            </svg>
+                            <span id="progressText" class="font-bold tracking-widest text-sm"></span>
+                        </span>
+                    </button>
+                    <p class="hint mt-2">Data will be used for academic analysis only (aggregate).</p>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+   <script>
+    // ========= CONFIG: Replace with your Apps Script URL =========
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby76V71x2RyWbAzBuG_lXYBC64w8d1JOBQypcj-8p8Dj0khLdbFGn-XM-r0GE---HY/exec";
+    // ============================================================
+
+    const form = document.getElementById("digitalSurveyForm");
+    const submitMsg = document.getElementById("submitMsg");
+    const submitBtn = document.getElementById("submitBtn");
+    const submitBtnText = document.getElementById("submitBtnText");
+    const progressText = document.getElementById("progressText");
+    const progressContainer = document.getElementById("progressContainer");
+
+    // Consent validation only (rest handled by 'required' attributes)
+    function validateForm() {
+        const consent = document.getElementById("consent");
+        if (!consent.checked) {
+            alert("Please provide consent to continue. (অগ্রসর হতে সম্মতি দিন)");
+            consent.focus();
+            return false;
+        }
+        return true;
+    }
+
+    // Fake progress up to 70%
+    function showProgressSteps() {
+        progressContainer.classList.remove("hidden");
+        progressText.textContent = "20%";
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                progressText.textContent = "45%";
+                setTimeout(() => {
+                    progressText.textContent = "70%";
+                    setTimeout(() => resolve(), 400);
+                }, 500);
+            }, 500);
+        });
+    }
+
+    // Show 100% at the end
+    function show100Percent() {
+        progressText.textContent = "100%";
+        return new Promise((resolve) => setTimeout(resolve, 900));
+    }
+
+    // Combine checkbox groups into CSV strings for Sheets
+    function normalizeFormData(fd) {
+        const multiKeys = ["C3_physical[]", "D4_content[]"];
+        for (const key of multiKeys) {
+            const vals = fd.getAll(key);
+            if (vals.length) {
+                fd.delete(key);
+                fd.append(key.replace("[]", ""), vals.join(", "));
+            }
+        }
+        fd.append("submittedAt", new Date().toISOString());
+        return fd;
+    }
+
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        if (!validateForm()) return;
+
+        // UI setup
+        submitBtn.disabled = true;
+        submitBtnText.classList.add("hidden");
+        progressContainer.classList.remove("hidden");
+        progressText.textContent = "0%";
+        submitMsg.classList.add("hidden");
+
+        const raw = new FormData(form);
+        const formData = normalizeFormData(raw);
+
+        // Run fake progress
+        const progressPromise = showProgressSteps();
+
+        try {
+            // Wait until fake progress reaches 70%
+            await progressPromise;
+
+            // Perform submission
+            const response = await fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                body: formData,
+                mode: "no-cors" // Google Apps Script often needs this
+            });
+
+            // Wait a bit to simulate completion
+            await show100Percent();
+
+            // Restore UI
+            submitBtn.disabled = false;
+            submitBtnText.classList.remove("hidden");
+            progressContainer.classList.add("hidden");
+
+            // Display message — assume success if no error thrown
+            submitMsg.textContent = "Submitted successfully. Thank you! (আপনার উত্তর সফলভাবে জমা হয়েছে। ধন্যবাদ!)";
+            submitMsg.style.color = "#16a34a"; // green
+            submitMsg.classList.remove("hidden");
+
+            form.reset();
+            const consent = document.getElementById("consent");
+            if (consent) consent.checked = false;
+
+        } catch (error) {
+            console.error("Submission error:", error);
+            submitMsg.textContent = "Connection error with the server. (সার্ভারের সাথে সংযোগে সমস্যা হয়েছে।)";
+            submitMsg.style.color = "#ef4444"; // red
+            submitMsg.classList.remove("hidden");
+        } finally {
+            // Hide message after delay
+            setTimeout(() => submitMsg.classList.add("hidden"), 5000);
+        }
+    });
+</script>
+
+</body>
+
+</html>
